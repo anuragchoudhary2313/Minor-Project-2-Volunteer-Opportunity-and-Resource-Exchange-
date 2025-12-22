@@ -1,5 +1,3 @@
-<div align="center">
-
 # 🤝 Help Hub
 
 ### Volunteer Opportunity and Resource Exchange Platform
@@ -8,13 +6,11 @@
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E? style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
 *Connecting volunteers with opportunities and facilitating resource exchange in communities*
 
 [Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
-
-</div>
 
 ---
 
@@ -37,14 +33,14 @@
 
 ## 🌟 About the Project
 
-**Help Hub** is a comprehensive platform designed to bridge the gap between volunteers and organizations seeking assistance. It facilitates seamless resource exchange within communities, making it easier for people to contribute their time, skills, and resources where they're needed most.
+**Help Hub** is a comprehensive platform designed to bridge the gap between volunteers and organizations seeking assistance. It facilitates seamless resource exchange within communities, making it easier for people to help each other and make a positive impact.
 
 ### Why Help Hub?
 
 - 🎯 **Streamlined Matching**: Connect volunteers with opportunities that match their skills and interests
 - 🔄 **Resource Exchange**: Enable communities to share resources efficiently
 - 📱 **Modern Interface**: Intuitive, responsive design for seamless user experience
-- 🔐 **Secure**:  Built with authentication and data security in mind
+- 🔐 **Secure**: Built with authentication and data security in mind
 - 🚀 **Real-time Updates**: Instant notifications for new opportunities and exchanges
 
 ---
@@ -57,8 +53,8 @@
 - 💬 **Resource Exchange**: Post and request resources within the community
 - 🔔 **Notifications**: Stay updated with real-time notifications
 - 📊 **Dashboard**: Track volunteer hours, completed opportunities, and impact metrics
-- 🌐 **Responsive Design**:  Fully functional across desktop, tablet, and mobile devices
-- 🔐 **Authentication**:  Secure user authentication powered by Supabase
+- 🌐 **Responsive Design**: Fully functional across desktop, tablet, and mobile devices
+- 🔐 **Authentication**: Secure user authentication powered by Supabase
 
 ---
 
@@ -202,7 +198,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## 📄 License
 
-Distributed under the MIT License.  See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
@@ -210,7 +206,7 @@ Distributed under the MIT License.  See `LICENSE` for more information.
 
 **Anurag Choudhary** - [@anuragchoudhary2313](https://github.com/anuragchoudhary2313)
 
-**Project Link**:  [https://github.com/anuragchoudhary2313/Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-](https://github.com/anuragchoudhary2313/Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-)
+**Project Link**: [https://github.com/anuragchoudhary2313/Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-](https://github.com/anuragchoudhary2313/Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-)
 
 ---
 
