@@ -6,9 +6,11 @@
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
-*Connecting volunteers with opportunities and facilitating resource exchange in communities*
+_Connecting volunteers with opportunities and facilitating resource exchange in communities_
 
 [Demo](#) · [Report Bug](../../issues) · [Request Feature](../../issues)
 
@@ -41,7 +43,8 @@
 - 🔄 **Resource Exchange**: Enable communities to share resources efficiently
 - 📱 **Modern Interface**: Intuitive, responsive design for seamless user experience
 - 🔐 **Secure**: Built with authentication and data security in mind
-- 🚀 **Real-time Updates**: Instant notifications for new opportunities and exchanges
+- 🔐 **Secure**: JWT authentication with hashed passwords
+- 🚀 **Deployed**: Vercel-ready frontend + API backend
 
 ---
 
@@ -54,22 +57,24 @@
 - 🔔 **Notifications**: Stay updated with real-time notifications
 - 📊 **Dashboard**: Track volunteer hours, completed opportunities, and impact metrics
 - 🌐 **Responsive Design**: Fully functional across desktop, tablet, and mobile devices
-- 🔐 **Authentication**: Secure user authentication powered by Supabase
+- 🔐 **Authentication**: Secure JWT-based auth
 
 ---
 
 ## 🛠 Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| **React 18** | UI library for building interactive user interfaces |
-| **TypeScript** | Type-safe JavaScript for better developer experience |
-| **Vite** | Fast build tool and development server |
-| **Tailwind CSS** | Utility-first CSS framework for styling |
-| **Supabase** | Backend as a Service (BaaS) for authentication and database |
-| **React Router** | Client-side routing |
-| **React Hot Toast** | Beautiful notifications |
-| **Lucide React** | Modern icon library |
+| Technology                | Purpose                             |
+| ------------------------- | ----------------------------------- |
+| **React 18 + TypeScript** | Frontend UI                         |
+| **Vite**                  | Fast dev/build tooling              |
+| **Tailwind CSS**          | Styling                             |
+| **React Router**          | Client-side routing                 |
+| **React Hot Toast**       | Notifications                       |
+| **Axios**                 | API client                          |
+| **Node.js + Express**     | Backend API                         |
+| **MongoDB + Mongoose**    | Database and ODM                    |
+| **JWT + bcrypt**          | Authentication & password hashing   |
+| **Vercel**                | Hosting (frontend & serverless API) |
 
 ---
 
@@ -81,7 +86,7 @@ Before you begin, ensure you have the following installed:
 
 - **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
 - **npm** or **yarn** package manager
-- **Supabase Account** - [Sign up](https://supabase.com/)
+- **MongoDB** (local) or **MongoDB Atlas** account
 
 ### Installation
 
@@ -100,39 +105,53 @@ Before you begin, ensure you have the following installed:
    yarn install
    ```
 
-3. **Set up Supabase**
+3. **Configure environment variables**
 
-   - Create a new project in [Supabase](https://supabase.com/)
-   - Navigate to Project Settings → API
-   - Copy your project URL and anon key
-
-4. **Configure environment variables**
-
-   Create a `.env` file in the root directory:
+   **Frontend (.env):**
 
    ```env
-   VITE_SUPABASE_URL=your_supabase_project_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   VITE_API_URL=http://localhost:5000/api
    ```
 
-5. **Run the development server**
+   **Backend (server/.env):**
+
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_secret_key
+   PORT=5000
+   ```
+
+4. **Install backend dependencies**
+
+   ```bash
+   cd server
+   npm install
+   ```
+
+5. **Start backend (port 5000)**
 
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
 
-6. **Open your browser**
+6. **Start frontend (port 5173)**
 
-   Navigate to `http://localhost:5173` to see the application
+   ```bash
+   cd ..
+   npm install
+   npm run dev
+   ```
+
+7. **Open your browser** at `http://localhost:5173`
 
 ### Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| `VITE_SUPABASE_URL` | Your Supabase project URL |
-| `VITE_SUPABASE_ANON_KEY` | Your Supabase anonymous key |
+| Variable       | Description                                        |
+| -------------- | -------------------------------------------------- |
+| `VITE_API_URL` | Base URL for API (e.g., http://localhost:5000/api) |
+| `MONGODB_URI`  | MongoDB/Atlas connection string (server/.env)      |
+| `JWT_SECRET`   | Secret for signing JWTs (server/.env)              |
+| `PORT`         | Backend port (default 5000, server/.env)           |
 
 ---
 
@@ -173,12 +192,17 @@ Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-/
 │   ├── types/           # TypeScript type definitions
 │   ├── styles/          # Global styles
 │   └── App.tsx          # Main application component
-├── supabase/            # Supabase configuration and migrations
 ├── public/              # Static assets
 ├── index.html           # HTML entry point
 ├── vite.config.ts       # Vite configuration
 ├── tailwind.config.js   # Tailwind CSS configuration
 ├── tsconfig.json        # TypeScript configuration
+├── server/              # Express API (Node.js + MongoDB)
+│   ├── models/          # Mongoose schemas
+│   ├── routes/          # API routes
+│   ├── middleware/      # Auth middleware
+│   └── index.js         # Server entry
+├── vercel.json          # Vercel deployment config
 └── package.json         # Project dependencies
 ```
 
