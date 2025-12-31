@@ -19,6 +19,7 @@ _Connecting volunteers with opportunities and facilitating resource exchange in 
 ## 📋 Table of Contents
 
 - [About](#-about)
+- [Live Links](#-live-links)
 - [Features](#-features)
 - [Architecture](#-architecture)
 - [Tech Stack](#-tech-stack)
@@ -41,11 +42,19 @@ _Connecting volunteers with opportunities and facilitating resource exchange in 
 Help Hub bridges volunteers and organizations, enabling opportunity discovery and community resource exchange. The platform now runs on a custom Express + MongoDB backend with JWT auth.
 
 ### Highlights
+
 - 🎯 Smart matching of volunteers to opportunities
 - 🔄 Community resource exchange (offer/request)
 - 🔐 JWT authentication with hashed passwords
 - 📱 Responsive, modern UI
 - 🚀 Vercel-ready frontend + API backend
+
+---
+
+## 🔗 Live Links
+
+- Frontend: https://minor-project-2-volunteer-opportunity-and-resource-21grrqsqk.vercel.app
+- Backend: https://minor-project-2-volunteer-opportunity.onrender.com/api
 
 ---
 
@@ -71,18 +80,18 @@ Help Hub bridges volunteers and organizations, enabling opportunity discovery an
 
 ## 🛠 Tech Stack
 
-| Technology                | Purpose                             |
-| ------------------------- | ----------------------------------- |
-| React 18 + TypeScript     | Frontend UI                         |
-| Vite                      | Fast dev/build tooling              |
-| Tailwind CSS              | Styling                             |
-| React Router              | Client-side routing                 |
-| React Hot Toast           | Notifications                       |
-| Axios                     | API client                          |
-| Node.js + Express         | Backend API                         |
-| MongoDB + Mongoose        | Database and ODM                    |
-| JWT + bcrypt              | Authentication & password hashing   |
-| Vercel                    | Hosting (frontend & serverless API) |
+| Technology            | Purpose                             |
+| --------------------- | ----------------------------------- |
+| React 18 + TypeScript | Frontend UI                         |
+| Vite                  | Fast dev/build tooling              |
+| Tailwind CSS          | Styling                             |
+| React Router          | Client-side routing                 |
+| React Hot Toast       | Notifications                       |
+| Axios                 | API client                          |
+| Node.js + Express     | Backend API                         |
+| MongoDB + Mongoose    | Database and ODM                    |
+| JWT + bcrypt          | Authentication & password hashing   |
+| Vercel                | Hosting (frontend & serverless API) |
 
 ---
 
@@ -112,17 +121,20 @@ Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-/
 ## ⚡ Quick Start (Local)
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 - MongoDB (local) or MongoDB Atlas account
 
 ### 1) Clone
+
 ```bash
 git clone https://github.com/anuragchoudhary2313/Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-.git
 cd Minor-Project-2-Volunteer-Opportunity-and-Resource-Exchange-
 ```
 
 ### 2) Backend setup
+
 ```bash
 cd server
 npm install
@@ -136,6 +148,7 @@ npm run dev
 ```
 
 ### 3) Frontend setup (new terminal)
+
 ```bash
 cd ..
 
@@ -145,6 +158,7 @@ npm run dev
 ```
 
 ### 4) Smoke test
+
 - Sign up / log in
 - Create an opportunity
 - Sign up for an opportunity
@@ -155,12 +169,12 @@ npm run dev
 
 ## 🔑 Environment Variables
 
-| Scope      | Variable       | Example / Notes                                  |
-| ---------- | -------------- | ------------------------------------------------ |
-| Frontend   | `VITE_API_URL` | `http://localhost:5000/api` or your deployed URL |
-| Backend    | `MONGODB_URI`  | Atlas/local connection string                    |
-| Backend    | `JWT_SECRET`   | Long random string                               |
-| Backend    | `PORT`         | `5000` (or custom)                               |
+| Scope    | Variable       | Example / Notes                                  |
+| -------- | -------------- | ------------------------------------------------ |
+| Frontend | `VITE_API_URL` | `http://localhost:5000/api` or your deployed URL |
+| Backend  | `MONGODB_URI`  | Atlas/local connection string                    |
+| Backend  | `JWT_SECRET`   | Long random string                               |
+| Backend  | `PORT`         | `5000` (or custom)                               |
 
 ---
 
@@ -183,33 +197,36 @@ npm run dev
 - Dependency highlights: `axios`, `mongoose`, `express`, `jsonwebtoken`, `bcryptjs`, `cors`, `dotenv`, `nodemon`.
 
 ### Differences
-| Area            | Supabase                   | MongoDB + Express              |
-| --------------- | -------------------------- | ------------------------------ |
-| Auth            | Built-in                   | Custom JWT                     |
-| DB              | Postgres                   | MongoDB                        |
-| API             | SDK calls                  | REST (Axios)                   |
-| Real-time       | Built-in                   | Not implemented (add Socket.io) |
-| Storage         | Built-in                   | Add S3/Cloudinary separately   |
+
+| Area      | Supabase  | MongoDB + Express               |
+| --------- | --------- | ------------------------------- |
+| Auth      | Built-in  | Custom JWT                      |
+| DB        | Postgres  | MongoDB                         |
+| API       | SDK calls | REST (Axios)                    |
+| Real-time | Built-in  | Not implemented (add Socket.io) |
+| Storage   | Built-in  | Add S3/Cloudinary separately    |
 
 ---
 
 ## ☁️ Deployment (Vercel)
 
 ### Dashboard deploy
-1) Import repo on [vercel.com](https://vercel.com) → Add New Project.
-2) Settings:
+
+1. Import repo on [vercel.com](https://vercel.com) → Add New Project.
+2. Settings:
    - Framework: Vite
    - Root: `./`
    - Build: `npm run build`
    - Output: `dist`
-3) Env vars (Project Settings → Environment Variables):
+3. Env vars (Project Settings → Environment Variables):
    - `MONGODB_URI` = your Atlas URI
    - `JWT_SECRET` = strong secret
    - `VITE_API_URL` = `https://<your-app>.vercel.app/api` (update after first deploy)
-4) Deploy.
-5) After first deploy, set `VITE_API_URL` to the deployed URL and redeploy.
+4. Deploy.
+5. After first deploy, set `VITE_API_URL` to the deployed URL and redeploy.
 
 ### CLI deploy
+
 ```powershell
 npm install -g vercel
 vercel login
@@ -218,6 +235,7 @@ vercel --prod   # production
 ```
 
 ### Production checklist
+
 - MongoDB Atlas network access allows your deploy (0.0.0.0/0 or specific CIDR).
 - Strong `JWT_SECRET` configured.
 - `VITE_API_URL` points to production.
@@ -236,6 +254,7 @@ vercel --prod   # production
 ---
 
 ## 🚧 Future Enhancements
+
 - Email service (Nodemailer/SendGrid)
 - Real-time updates (Socket.io)
 - File uploads (Multer + S3/Cloudinary)
