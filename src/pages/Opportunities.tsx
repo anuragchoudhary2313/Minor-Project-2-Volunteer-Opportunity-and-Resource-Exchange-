@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
+import api from '../lib/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import OpportunityCard from '../components/OpportunityCard';
@@ -45,23 +45,13 @@ const Opportunities: React.FC = () => {
       setLoading(true);
       
       // Fetch opportunities
-      const { data: opportunitiesData, error: opportunitiesError } = await supabase
-        .from('opportunities')
-        .select('*')
-        .order('date', { ascending: true });
-        
-      if (opportunitiesError) throw opportunitiesError;
+      const { data: opportunitiesData } = await api.get('/opportunities');
       
       setOpportunities(opportunitiesData || []);
       
       if (user) {
         // Fetch user's signups
-        const { data: signupsData, error: signupsError } = await supabase
-          .from('volunteer_signups')
-          .select('*')
-          .eq('user_id', user.id);
-          
-        if (signupsError) throw signupsError;
+        const { data: signupsData } = await api.get('/opportunities/signups');
         
         setSignups(signupsData || []);
       }
@@ -90,13 +80,9 @@ const Opportunities: React.FC = () => {
         return;
       }
       
-      const { error } = await supabase.from('volunteer_signups').insert({
-        user_id: user.id,
+      await api.post('/opportunities/signup', {
         opportunity_id: opportunityId,
-        status: 'pending',
       });
-      
-      if (error) throw error;
       
       toast.success('Successfully signed up for this opportunity!');
       fetchOpportunities(); // Refresh data
@@ -115,12 +101,7 @@ const Opportunities: React.FC = () => {
     }
     
     try {
-      const { error } = await supabase.from('opportunities').insert({
-        ...newOpportunity,
-        user_id: user.id,
-      });
-      
-      if (error) throw error;
+      await api.post('/opportunities', newOpportunity);
       
       toast.success('Opportunity created successfully!');
       setIsCreating(false);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
+import api from '../lib/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { User } from '../types';
@@ -30,18 +30,12 @@ const Profile: React.FC = () => {
     try {
       setLoading(true);
       
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
+      const { data } = await api.get('/users');
         
-      if (error) throw error;
-      
       if (data) {
         const userData: User = {
-          id: data.id,
-          email: user.email || '',
+          id: data._id,
+          email: data.email,
           full_name: data.full_name,
           location: data.location,
           skills: data.skills,
@@ -88,16 +82,12 @@ const Profile: React.FC = () => {
         .map((interest) => interest.trim())
         .filter((interest) => interest);
       
-      const { error } = await supabase
-        .from('profiles')
-        .update({
-          full_name: formData.full_name,
-          location: formData.location,
-          skills,
-          interests,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', user.id);
+      await api.put('/users', {
+        full_name: formData.full_name,
+        location: formData.location,
+        skills,
+        interests,
+      });
         
       if (error) throw error;
       

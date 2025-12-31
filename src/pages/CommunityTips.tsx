@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { supabase } from '../lib/supabase';
+import api from '../lib/api';
 import { CommunityTip } from '../types';
 import { Lightbulb } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -30,11 +30,7 @@ const CommunityTips: React.FC = () => {
     try {
       setLoading(true);
       
-      const { data, error } = await supabase
-        .from('community_tips')
-        .select('*');
-        
-      if (error) throw error;
+      const { data } = await api.get('/community-tips');
       
       setTips(data || []);
       

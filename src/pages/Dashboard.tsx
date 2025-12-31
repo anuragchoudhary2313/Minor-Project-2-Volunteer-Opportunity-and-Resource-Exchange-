@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
+import api from '../lib/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import DashboardCard from '../components/DashboardCard';
@@ -24,58 +24,28 @@ const Dashboard: React.FC = () => {
         setLoading(true);
         
         // Fetch user profile
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('full_name')
-          .eq('id', user.id)
-          .single();
+        const { data: profileData } = await api.get('/users');
           
         if (profileData) {
           setUserName(profileData.full_name);
         }
         
         // Fetch volunteer signups with opportunity details
-        const { data: signupsData, error: signupsError } = await supabase
-          .from('volunteer_signups')
-          .select(`
-            id,
-            user_id,
-            opportunity_id,
-            status,
-            opportunities (
-              id,
-              title,
-              description,
-              category,
-              location,
-              date,
-              contact
-            )
-          `)
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
-          
-        if (signupsError) throw signupsError;
+        const { data: signupsData } = await api.get('/opportunities/signups');
         
         // Transform the data to match our types
         const formattedSignups = signupsData.map((signup: any) => ({
-          id: signup.id,
+          id: signup._id,
           user_id: signup.user_id,
-          opportunity_id: signup.opportunity_id,
+          opportunity_id: signup.opportunity_id._id,
           status: signup.status,
-          opportunity: signup.opportunities,
+          opportunity: signup.opportunity_id,
         }));
         
         setSignups(formattedSignups);
         
         // Fetch user's resources
-        const { data: resourcesData, error: resourcesError } = await supabase
-          .from('resources')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('created_at', { ascending: false });
-          
-        if (resourcesError) throw resourcesError;
+        const { data: resourcesData } = await api.get('/resources/my-resources');
         
         setResources(resourcesData || []);
       } catch (error) {

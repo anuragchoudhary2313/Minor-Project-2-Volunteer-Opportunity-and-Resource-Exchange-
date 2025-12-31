@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
+import api from '../lib/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ResourceCard from '../components/ResourceCard';
@@ -35,12 +35,7 @@ const Resources: React.FC = () => {
     try {
       setLoading(true);
       
-      const { data, error } = await supabase
-        .from('resources')
-        .select('*')
-        .order('created_at', { ascending: false });
-        
-      if (error) throw error;
+      const { data } = await api.get('/resources');
       
       setResources(data || []);
     } catch (error) {
@@ -60,12 +55,7 @@ const Resources: React.FC = () => {
     }
     
     try {
-      const { error } = await supabase.from('resources').insert({
-        ...newResource,
-        user_id: user.id,
-      });
-      
-      if (error) throw error;
+      await api.post('/resources', newResource);
       
       toast.success('Resource listing created successfully!');
       setIsCreating(false);
